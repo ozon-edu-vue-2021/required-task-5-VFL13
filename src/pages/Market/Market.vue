@@ -1,16 +1,75 @@
 <template>
-  <div>Market {{ items }}</div>
+  <div class="center grid">
+    <vs-row align="center" justify="center">
+      <vs-col w="10">
+        <vs-row align="center" justify="space-between">
+          <h1>Products</h1>
+          <vs-switch :disabled="!haveFavourites" v-model="isFavorites"
+            >Show Favourites
+          </vs-switch>
+        </vs-row>
+      </vs-col>
+    </vs-row>
+    <vs-row align="center" justify="center">
+      <vs-col
+        class="product-card"
+        v-for="product in displayedProducts"
+        :key="product.id"
+        vs-type="flex"
+        vs-justify="center"
+        vs-align="center"
+        w="4"
+        lg="3"
+        sm="6"
+      >
+        <ProductCard
+          :product="product"
+          :favourite="product.favourite"
+          :cart="product.inCart"
+        />
+      </vs-col>
+    </vs-row>
+  </div>
 </template>
 
 <script>
+import ProductCard from "./components/ProductCard";
+import { mapGetters } from "vuex";
+
 export default {
   name: "Market",
+  components: { ProductCard },
+  data() {
+    return {
+      isFavorites: false,
+    };
+  },
   computed: {
-    items() {
-      return this.$store.state.market.items
-    }
-  }
+    ...mapGetters({
+      products: "market/allProducts",
+      favorites: "market/favouritesProducts",
+    }),
+    haveFavourites() {
+      return !!this.favorites.length;
+    },
+    displayedProducts() {
+      return this.isFavorites && this.haveFavourites
+        ? this.favorites
+        : this.products;
+    },
+  },
+  watch: {
+    haveFavourites(val) {
+      if (!val) {
+        this.isFavorites = false;
+      }
+    },
+  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.product-card {
+  padding: 20px;
+}
+</style>

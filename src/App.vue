@@ -1,13 +1,19 @@
 <template>
-  <div id="app">
-    <router-link to="/">Main</router-link>
-    <router-link to="/cart">Cart</router-link>
-    <router-view></router-view>
+  <div id="app" class="center grid">
+    <NavBar />
+    <vs-row align="center" justify="center">
+      <vs-col vs-type="flex" vs-justify="center" vs-align="center" w="11">
+        <transition name="slide-fade">
+          <router-view></router-view>
+        </transition>
+      </vs-col>
+    </vs-row>
   </div>
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
+import NavBar from "./pages/components/NavBar";
 
 export default {
   name: "App",
@@ -16,26 +22,16 @@ export default {
       img: null,
     };
   },
-  components: {},
-  // computed: {
-  //   url() {
-  //     return this.img?.url;
-  //   },
-  // },
-  // async created() {
-  //   this.img = await this.getImage("Cat", { size: "small", type: "WebP" });
-  // },
+  components: { NavBar },
   created() {
-    this.fetchProducts()
+    const loading = this.$vs.loading();
+    this.fetchProducts();
+    loading.close();
   },
   methods: {
     ...mapActions({
-      'fetchProducts': 'market/fetchProducts'
-    })
-    // async getImage(searchName) {
-    //   const images = await imageFinder.search(`${searchName}`);
-    //   return images.length ? images[0] : null;
-    // },
+      fetchProducts: "market/fetchProducts",
+    }),
   },
 };
 </script>

@@ -1,4 +1,5 @@
 import VueRouter from "vue-router";
+import store from "@/plugins/store";
 
 const routes = [
   {
@@ -10,6 +11,9 @@ const routes = [
     path: "/cart",
     name: "cart",
     component: () => import("@/pages/Cart/Cart"),
+    beforeEnter: (to, from, next) => {
+      store.getters["market/productCount"] ? next() : next("/");
+    },
   },
 ];
 
