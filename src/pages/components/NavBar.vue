@@ -3,9 +3,9 @@
     <vs-col w="10">
       <vs-row align="center" justify="end">
         <vs-button
+          :active="$route.fullPath === '/'"
           transparent
           @click.stop="goToPath('/')"
-          :active="$route.fullPath === '/'"
         >
           Products
         </vs-button>

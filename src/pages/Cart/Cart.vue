@@ -5,7 +5,7 @@
         <vs-row align="center" justify="space-between">
           <h1>Cart</h1>
           <h1>Total price: ${{ totalPrice }}</h1>
-          <vs-button :disabled="!productCount" @click.stop="buy" size="large">
+          <vs-button :disabled="!productCount" size="large" @click.stop="buy">
             BUY
           </vs-button>
         </vs-row>
@@ -20,7 +20,7 @@
         vs-align="center"
         w="10"
       >
-        <ProductInCartCart
+        <ProductInCartCard
           :product="product"
           :favourite="product.favourite"
           :cart="product.inCart"
@@ -31,12 +31,12 @@
 </template>
 
 <script>
-import ProductInCartCart from "./components/ProductInCartCart";
+import ProductInCartCard from "./components/ProductInCartCard";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Cart",
-  components: { ProductInCartCart },
+  components: { ProductInCartCard },
   computed: {
     ...mapGetters({
       products: "market/productsInCart",

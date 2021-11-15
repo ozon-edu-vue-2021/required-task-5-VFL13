@@ -29,11 +29,9 @@ const getters = {
   productCount: (state) => {
     return Object.keys(state.cart).length;
   },
-  totalPrice: (state) => {
-    return state.products.reduce((acc, product) => {
-      return product.id in state.cart
-        ? acc + product.price * product.inCart
-        : acc;
+  totalPrice: (state, getters) => {
+    return getters.productsInCart.reduce((acc, product) => {
+      return acc + product.price * product.inCart;
     }, 0);
   },
 };

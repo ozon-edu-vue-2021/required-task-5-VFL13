@@ -5,7 +5,7 @@
       <h2>$ {{ product.price }}</h2>
     </template>
     <template #img>
-      <img :src="product.img" alt="" />
+      <img :src="product.img" :alt="product.dish" />
     </template>
     <template #text>
       <p class="text">
@@ -17,19 +17,19 @@
         :shadow="!favourite"
         :dark="!favourite"
         :danger="favourite"
-        @click.stop="toggleFavorite({ id: product.id, favourite: favourite })"
         icon
+        @click.stop="toggleFavorite({ id: product.id, favourite: favourite })"
       >
         <i class="bx bx-heart"></i>
       </vs-button>
 
       <vs-button
-        @click.stop="addToCart({ id: product.id, inCart: cart })"
-        class="btn-chat"
-        icon
         :shadow="!cart"
         :dark="!cart"
         :primary="!!cart"
+        class="btn-chat"
+        icon
+        @click.stop="addToCart({ id: product.id, inCart: cart })"
       >
         <i class="bx bx-cart"></i>
       </vs-button>
@@ -62,31 +62,11 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import MinixCard from "@/mixins/MinixCard";
 
 export default {
   name: "ProductCard",
-  props: {
-    product: {
-      type: Object,
-      required: true,
-    },
-    favourite: {
-      type: Boolean,
-      default: false,
-    },
-    cart: {
-      type: Number || null,
-      default: null,
-    },
-  },
-  methods: {
-    ...mapActions({
-      addToCart: "market/addToCart",
-      toggleFavorite: "market/toggleFavorite",
-      removeFromCart: "market/removeFromCart",
-    }),
-  },
+  mixins: [MinixCard],
 };
 </script>
 

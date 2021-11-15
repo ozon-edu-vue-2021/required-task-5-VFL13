@@ -15,6 +15,12 @@ const routes = [
       store.getters["market/productCount"] ? next() : next("/");
     },
   },
+  {
+    path: "*",
+    beforeEnter: (to, from, next) => {
+      next("/");
+    },
+  },
 ];
 
 const router = new VueRouter({

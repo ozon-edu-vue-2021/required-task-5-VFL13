@@ -4,7 +4,7 @@
       <vs-col w="10">
         <vs-row align="center" justify="space-between">
           <h1>Products</h1>
-          <vs-switch :disabled="!haveFavourites" v-model="isFavorites"
+          <vs-switch v-model="isFavorites" :disabled="!haveFavourites"
             >Show Favourites
           </vs-switch>
         </vs-row>
@@ -12,7 +12,6 @@
     </vs-row>
     <vs-row align="center" justify="center">
       <vs-col
-        class="product-card"
         v-for="product in displayedProducts"
         :key="product.id"
         vs-type="flex"
@@ -21,6 +20,7 @@
         w="4"
         lg="3"
         sm="6"
+        class="product-card"
       >
         <ProductCard
           :product="product"

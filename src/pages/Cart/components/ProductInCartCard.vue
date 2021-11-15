@@ -3,7 +3,7 @@
     <div class="grid">
       <vs-row justify="flex-start">
         <vs-col w="3" sm="3" lg="3">
-          <img class="shape-img" :src="product.img" alt="" />
+          <img class="shape-img" :src="product.img" :alt="product.dish" />
         </vs-col>
         <vs-col w="9" sm="6" lg="9" class="card-text">
           <vs-row justify="space-between" align="center">
@@ -35,10 +35,10 @@
                   :shadow="!favourite"
                   :dark="!favourite"
                   :danger="favourite"
+                  icon
                   @click.stop="
                     toggleFavorite({ id: product.id, favourite: favourite })
                   "
-                  icon
                 >
                   <i class="bx bx-heart"></i>
                 </vs-button>
@@ -80,32 +80,11 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import MinixCard from "@/mixins/MinixCard";
 
 export default {
-  name: "ProductInCartCart",
-  props: {
-    product: {
-      type: Object,
-      required: true,
-    },
-    favourite: {
-      type: Boolean,
-      default: false,
-    },
-    cart: {
-      type: Number || null,
-      default: null,
-    },
-  },
-  methods: {
-    ...mapActions({
-      addToCart: "market/addToCart",
-      toggleFavorite: "market/toggleFavorite",
-      removeFromCart: "market/removeFromCart",
-      removeAllFromCart: "market/removeAllFromCart",
-    }),
-  },
+  name: "ProductInCartCard",
+  mixins: [MinixCard],
 };
 </script>
 
