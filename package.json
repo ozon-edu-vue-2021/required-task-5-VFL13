@@ -9,9 +9,12 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "google-images": "^2.1.0",
+    "setimmediate": "^1.0.5",
     "vue": "^2.6.11",
-    "vue-svg-loader": "^0.16.0",
-    "vuedraggable": "^2.24.3"
+    "vue-router": "^3.5.3",
+    "vuex": "^3.6.2",
+    "yandex-pictures": "^1.4.88"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
