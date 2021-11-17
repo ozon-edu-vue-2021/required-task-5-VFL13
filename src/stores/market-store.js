@@ -44,13 +44,13 @@ const actions = {
       );
       if (response.ok) {
         const fetchedProducts = await response.json();
-        const products = fetchedProducts.map((product) => {
-          product.img = `https://loremflickr.com/320/240/food,${
+        const products = fetchedProducts.map((product) => ({
+          ...product,
+          img: `https://loremflickr.com/320/240/food,${
             product.dish.split(" ")[0]
-          }/`;
-          product.price = getRandomInt(MIN_PRICE, MAX_PRICE);
-          return product;
-        });
+          }/`,
+          price: getRandomInt(MIN_PRICE, MAX_PRICE),
+        }));
         commit("SET_PRODUCTS", products);
       }
     } catch (error) {
@@ -58,14 +58,10 @@ const actions = {
     }
   },
   addToCart: ({ commit }, product) => {
-    if (product.inCart) {
-      commit("SET_PRODUCT_COUNT_IN_CART", {
-        id: product.id,
-        productCount: product.inCart + 1,
-      });
-    } else {
-      commit("SET_PRODUCT_COUNT_IN_CART", { id: product.id, productCount: 1 });
-    }
+    commit("SET_PRODUCT_COUNT_IN_CART", {
+      id: product.id,
+      productCount: (product.inCart || 0) + 1,
+    });
   },
   removeFromCart: ({ commit }, product) => {
     if (product.inCart) {

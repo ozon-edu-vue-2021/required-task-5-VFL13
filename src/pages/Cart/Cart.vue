@@ -20,11 +20,7 @@
         vs-align="center"
         w="10"
       >
-        <ProductInCartCard
-          :product="product"
-          :favourite="product.favourite"
-          :cart="product.inCart"
-        />
+        <ProductInCartCard :product="product" />
       </vs-col>
     </vs-row>
   </div>
@@ -46,13 +42,14 @@ export default {
   },
   methods: {
     buy() {
-      let text = "";
-      this.products.forEach((product) => {
-        text += `<h2>${product.dish} - ${product.inCart} pics: ${
-          product.inCart * product.price
-        }</h2>`;
-      });
-      text += `<h2>Total: ${this.totalPrice}</h2>`;
+      const text = this.products
+        .map((product) => {
+          return `<h2>${product.dish} - ${product.inCart} pics: ${
+            product.inCart * product.price
+          }</h2>`;
+        })
+        .push(`<h2>Total: ${this.totalPrice}</h2>`)
+        .join("");
       this.$vs.notification({
         position: "top-center",
         color: "rgb(59,222,200)",

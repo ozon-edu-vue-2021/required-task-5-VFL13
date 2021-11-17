@@ -13,7 +13,7 @@
     <vs-row align="center" justify="center">
       <vs-col
         v-for="product in displayedProducts"
-        :key="product.id"
+        :key="`${product.id}${product.dish}`"
         vs-type="flex"
         vs-justify="center"
         vs-align="center"
@@ -22,11 +22,7 @@
         sm="6"
         class="product-card"
       >
-        <ProductCard
-          :product="product"
-          :favourite="product.favourite"
-          :cart="product.inCart"
-        />
+        <ProductCard :product="product" />
       </vs-col>
     </vs-row>
   </div>

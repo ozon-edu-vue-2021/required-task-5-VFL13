@@ -23,9 +23,9 @@ export default {
     };
   },
   components: { NavBar },
-  created() {
+  async created() {
     const loading = this.$vs.loading();
-    this.fetchProducts();
+    await this.fetchProducts();
     loading.close();
   },
   methods: {

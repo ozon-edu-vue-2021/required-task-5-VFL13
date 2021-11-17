@@ -16,7 +16,10 @@
                   icon
                   danger
                   @click.stop="
-                    removeAllFromCart({ id: product.id, inCart: cart })
+                    removeAllFromCart({
+                      id: product.id,
+                      inCart: product.inCart,
+                    })
                   "
                 >
                   <i class="bx bxs-trash"></i>
@@ -32,34 +35,42 @@
             <vs-col w="6">
               <vs-row justify="flex-start" align="center">
                 <vs-button
-                  :shadow="!favourite"
-                  :dark="!favourite"
-                  :danger="favourite"
+                  :shadow="!product.favourite"
+                  :dark="!product.favourite"
+                  :danger="product.favourite"
                   icon
                   @click.stop="
-                    toggleFavorite({ id: product.id, favourite: favourite })
+                    toggleFavorite({
+                      id: product.id,
+                      favourite: product.favourite,
+                    })
                   "
                 >
                   <i class="bx bx-heart"></i>
                 </vs-button>
-                <span v-if="cart" class="span">
+                <span v-if="product.inCart" class="span">
                   <vs-button-group>
                     <vs-button
                       shadow
                       icon
                       @click.stop="
-                        removeFromCart({ id: product.id, inCart: cart })
+                        removeFromCart({
+                          id: product.id,
+                          inCart: product.inCart,
+                        })
                       "
                     >
                       <i class="bx bx-minus"></i>
                     </vs-button>
                     <vs-button>
-                      {{ cart }}
+                      {{ product.inCart }}
                     </vs-button>
                     <vs-button
                       shadow
                       icon
-                      @click.stop="addToCart({ id: product.id, inCart: cart })"
+                      @click.stop="
+                        addToCart({ id: product.id, inCart: product.inCart })
+                      "
                     >
                       <i class="bx bx-plus"></i>
                     </vs-button>
@@ -69,7 +80,7 @@
             </vs-col>
             <vs-col w="6">
               <vs-row justify="flex-end" align="center">
-                <h1>Total ${{ product.price * cart }}</h1>
+                <h1>Total ${{ product.price * product.inCart }}</h1>
               </vs-row>
             </vs-col>
           </vs-row>

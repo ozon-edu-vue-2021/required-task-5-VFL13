@@ -8,14 +8,6 @@ export default {
       type: Object,
       required: true,
     },
-    favourite: {
-      type: Boolean,
-      default: false,
-    },
-    cart: {
-      type: Number || null,
-      default: null,
-    },
   },
   methods: {
     ...mapActions({
