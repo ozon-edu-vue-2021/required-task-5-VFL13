@@ -42,20 +42,19 @@ export default {
   },
   methods: {
     buy() {
-      const text = this.products
-        .map((product) => {
-          return `<h2>${product.dish} - ${product.inCart} pics: ${
-            product.inCart * product.price
-          }</h2>`;
-        })
-        .push(`<h2>Total: ${this.totalPrice}</h2>`)
-        .join("");
+      const text = this.products.map((product) => {
+        return `<h2>${product.dish} - ${product.inCart} pics: ${
+          product.inCart * product.price
+        }</h2>`;
+      });
+      text.push(`<h2>Total: ${this.totalPrice}</h2>`);
+
       this.$vs.notification({
         position: "top-center",
         color: "rgb(59,222,200)",
         width: "70%",
         title: `<h1>The order has been successfully placed</h1>`,
-        text: text,
+        text: text.join(""),
       });
     },
   },

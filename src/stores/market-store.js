@@ -13,9 +13,12 @@ const state = {
 const getters = {
   allProducts: (state) => {
     return state.products.map((product) => {
-      product.favourite = state.favourites.includes(product.id);
-      product.inCart = product.id in state.cart ? state.cart[product.id] : null;
-      return product;
+      const product_id = product.id;
+      return {
+        ...product,
+        favourite: state.favourites.includes(product_id),
+        inCart: product_id in state.cart ? state.cart[product_id] : null,
+      };
     });
   },
   favouritesProducts: (state, getters) => {

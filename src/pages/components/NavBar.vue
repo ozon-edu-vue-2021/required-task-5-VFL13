@@ -35,7 +35,7 @@ export default {
       if (this.$route.path !== path) this.$router.push(path);
     },
     goToCart() {
-      if (this.count) {
+      if (this.count && this.$route.path !== '/cart') {
         this.$router.push("/cart");
       } else {
         this.$vs.notification({
