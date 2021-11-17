@@ -1,7 +1,7 @@
 <template>
   <vs-card>
     <template #title>
-      <h2>{{ product.dish }} {{ product.favourite }}</h2>
+      <h2>{{ product.dish }}</h2>
       <h2>$ {{ product.price }}</h2>
     </template>
     <template #img>
