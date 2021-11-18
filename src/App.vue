@@ -1,34 +1,37 @@
 <template>
-  <div id="app">
+  <div id="app" class="center grid">
+    <NavBar />
+    <vs-row align="center" justify="center">
+      <vs-col vs-type="flex" vs-justify="center" vs-align="center" w="11">
+        <transition name="slide-fade">
+          <router-view></router-view>
+        </transition>
+      </vs-col>
+    </vs-row>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import NavBar from "./pages/components/NavBar";
 
 export default {
   name: "App",
-  components: {
-    Form,
+  data() {
+    return {
+      img: null,
+    };
+  },
+  components: { NavBar },
+  async created() {
+    const loading = this.$vs.loading();
+    await this.fetchProducts();
+    loading.close();
+  },
+  methods: {
+    ...mapActions({
+      fetchProducts: "market/fetchProducts",
+    }),
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-  background-color: #fafafa;
-  padding: 24px;
-  box-sizing: border-box;
-}
-
-html,
-body,
-#app {
-  height: 100%;
-}
-
-* {
-  box-sizing: border-box;
-}
-</style>
